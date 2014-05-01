@@ -1,0 +1,38 @@
+
+#customize-header-actions {
+	/*background-color: gray;*/
+}
+
+#new-font-name{
+	width: 65%;
+	margin-right: 1px;
+}
+
+#ht-new-font-add-btn{
+	width: 30%;
+}
+
+.ht-webfonts-custom-sub-title{
+	font-size: 24px;
+	margin-left: -10px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	float: left;
+}
+
+.ht-webfonts-custom-sub-info{
+	clear: left;
+	display: block;
+	float: left;
+	font-size: 14px;
+	margin-top: 4px;
+}
+
+.ht-webfonts-custom-sub-btn{
+	display: block;
+	float: right;
+}
+
+#customize-control-add-new-webfont{
+	margin-top: 20px;
+}
