@@ -4,7 +4,7 @@
 *	Plugin URI:  http://wordpress.org/plugins/heroic-webfonts/
 *	Description: Webfonts plugin for themes
 *	Author: Hero Themes
-*	Version: 1.0
+*	Version: 1.1
 *	Author URI: http://www.herothemes.com/
 *	Text Domain: ht-webfonts
 */
@@ -13,6 +13,19 @@
 
 
 if( !class_exists( 'HT_Webfonts' ) ){
+
+	if(!defined('HT_WEBFONT_HIDDEN')){
+		define('HT_WEBFONT_HIDDEN', 0);
+	}
+
+	if(!defined('HT_WEBFONT_READONLY')){
+		define('HT_WEBFONT_READONLY', 1);
+	}
+
+	if(!defined('HT_WEBFONT_EDITABLE')){
+		define('HT_WEBFONT_EDITABLE', 2);
+	}
+
 	class HT_Webfonts {
 
 		private $list_font_count;
@@ -21,8 +34,6 @@ if( !class_exists( 'HT_Webfonts' ) ){
 		private $list_fonts;
 		private $list_font_weights;
 		private $priority;
-
-
 		
 		//Constructor
 		function __construct(){
@@ -176,42 +187,70 @@ if( !class_exists( 'HT_Webfonts' ) ){
 			$fonts[0] = new HT_Custom_Webfont(
 				array(
 					'name' => 'Body',
+					'name-visibility' => HT_WEBFONT_EDITABLE,
 					'selector' => 'body',
+					'selector-visibility' => HT_WEBFONT_EDITABLE,
 					'source' => 'websafe',
+					'source-visibility' => HT_WEBFONT_EDITABLE,
 					'family' => 'Arial, Helvetica, sans-serif',
-					'style' => '400',
+					'family-visibility' => HT_WEBFONT_EDITABLE,
+					'style' => 'default',
+					'style-visibility' => HT_WEBFONT_EDITABLE,
 					'color' => '#b2b2b2',
+					'color-visibility' => HT_WEBFONT_EDITABLE,
 					'size'	=> '10',
+					'size-visibility'	=> HT_WEBFONT_EDITABLE,
 					'height' => '10',
-					'spacing' => '0'
+					'height-visibility' => HT_WEBFONT_EDITABLE,
+					'spacing' => '0',
+					'spacing-visibility' => HT_WEBFONT_EDITABLE,
+
 					)
 				);
 
 			$fonts[1] = new HT_Custom_Webfont(
 				array(
 					'name' => 'Title H1',
+					'name-visibility' => HT_WEBFONT_EDITABLE,
 					'selector' => 'h1',
+					'selector-visibility' => HT_WEBFONT_EDITABLE,
 					'source' => 'websafe',
+					'source-visibility' => HT_WEBFONT_EDITABLE,
 					'family' => 'Arial, Helvetica, sans-serif',
-					'style' => '400',
+					'family-visibility' => HT_WEBFONT_EDITABLE,
+					'style' => 'default',
+					'style-visibility' => HT_WEBFONT_EDITABLE,
 					'color' => '#b2b2b2',
+					'color-visibility' => HT_WEBFONT_EDITABLE,
 					'size'	=> '20',
+					'size-visibility' => HT_WEBFONT_EDITABLE,
 					'height' => '10',
-					'spacing' => '0'
+					'height-visibility' => HT_WEBFONT_EDITABLE,
+					'spacing' => '0',
+					'spacing-visibility' => HT_WEBFONT_EDITABLE,
 					)
 				);
 
 			$fonts[2] = new HT_Custom_Webfont(
 				array(
 					'name' => 'Title H2',
+					'name-visibility' => HT_WEBFONT_EDITABLE,
 					'selector' => 'h2',
+					'selector-visibility' => HT_WEBFONT_EDITABLE,
 					'source' => 'websafe',
+					'source-visibility' => HT_WEBFONT_EDITABLE,
 					'family' => 'Arial, Helvetica, sans-serif',
-					'style' => '400',
+					'family-visibility' => HT_WEBFONT_EDITABLE,
+					'style' => 'default',
+					'style-visibility' => HT_WEBFONT_EDITABLE,
 					'color' => '#b2b2b2',
+					'color-visibility' => HT_WEBFONT_EDITABLE,
 					'size'	=> '15',
+					'size-visibility' => HT_WEBFONT_EDITABLE,
 					'height' => '10',
-					'spacing' => '0'
+					'height-visibility' => HT_WEBFONT_EDITABLE,
+					'spacing' => '0',
+					'spacing-visibility' => HT_WEBFONT_EDITABLE,
 					)
 				);
 
@@ -229,29 +268,23 @@ if( !class_exists( 'HT_Webfonts' ) ){
 		/**
 		* Get the font styles
 		*/
-		static function get_font_styles(){
-			$font_styles = array( 
-				'100'       => __( 'Ultra Light', 'ht-webfonts' ),
-				'100italic' => __( 'Ultra Light Italic', 'ht-webfonts' ),
-				'200'       => __( 'Light', 'ht-webfonts' ),
-				'200italic' => __( 'Light Italic', 'ht-webfonts' ),
-				'300'       => __( 'Book', 'ht-webfonts' ),
-				'300italic' => __( 'Book Italic', 'ht-webfonts' ),
-				'400'       => __( 'Regular', 'ht-webfonts' ),
-				'400italic' => __( 'Regular Italic', 'ht-webfonts' ),
-				'500'       => __( 'Medium', 'ht-webfonts' ),
-				'500italic' => __( 'Medium Italic', 'ht-webfonts' ),
-				'600'       => __( 'Semi-Bold', 'ht-webfonts' ),
-				'600italic' => __( 'Semi-Bold Italic', 'ht-webfonts' ),
-				'700'       => __( 'Bold', 'ht-webfonts' ),
-				'700italic' => __( 'Bold Italic', 'ht-webfonts' ),
-				'800'       => __( 'Extra Bold', 'ht-webfonts' ),
-				'800italic' => __( 'Extra Bold Italic', 'ht-webfonts' ),
-				'900'       => __( 'Ultra Bold', 'ht-webfonts' ),
-				'900italic' => __( 'Ultra Bold Italic', 'ht-webfonts' )
-			);
+		static function get_font_styles(&$family_styles){
 
-			return $font_styles;
+			$font_styles = array();
+			foreach ($family_styles as $font => $styles) {
+				foreach ($styles as $key => $variant) {
+					//get font weight
+					$font_weight = preg_replace("/[^0-9?! ]/","", $variant);
+					//get the style
+					$font_style = preg_replace("/[^A-Za-z?! ]/","", $variant);
+					//make nicename
+					$nicename = $font_weight . ' ' . ucfirst($font_style);
+					$font_styles[(string)$variant] = $nicename;
+				}
+				
+			}
+
+			return array_unique($font_styles);
 		}
 
 		/**
@@ -301,100 +334,134 @@ if( !class_exists( 'HT_Webfonts' ) ){
 				
 				//selector
 				$default_selector = empty($webfont) ? '' : $webfont->selector;
-				$wp_customize->add_setting( 'ht_webfont_selector_' . $key, array('default' => $default_selector, 'transport'  => 'postMessage') );
+				if($default_selector===false){
+					//do nothing
+				} else {
+					$wp_customize->add_setting( 'ht_webfont_selector_' . $key, array('default' => $default_selector, 'transport'  => 'postMessage') );
 
-				$wp_customize->add_control( 'ht_webfont_selector_' . $key, array(
-				'type'     => 'text',
-				'label'    => __( 'Style Selector', 'ht-webfonts' ),
-				'section'  => 'ht_webfont',
-				'priority' => $this->priority++,
-				));
+					$wp_customize->add_control( 'ht_webfont_selector_' . $key, array(
+					'type'     => 'text',
+					'label'    => __( 'Style Selector', 'ht-webfonts' ),
+					'section'  => 'ht_webfont',
+					'priority' => $this->priority++,
+					));
+
+				}
+				
 
 
 				//webfont source
 				$default_source = empty($webfont) ? '' : $webfont->source;
-				$wp_customize->add_setting( 'ht_webfont_source_' . $key, array('default' => $default_source, 'transport'  => 'postMessage') );
+				if($default_source===false){
+					//do nothing
+				} else {
+					$wp_customize->add_setting( 'ht_webfont_source_' . $key, array('default' => $default_source, 'transport'  => 'postMessage') );
 
-				$wp_customize->add_control( 'ht_webfont_source_' . $key, array(
-				'type'     => 'select',
-				'label'    => __( 'Font Source', 'ht-webfonts' ),
-				'section'  => 'ht_webfont',
-				'priority' => $this->priority++,
-				'choices'  => $webfonts_sources
-				));
+					$wp_customize->add_control( 'ht_webfont_source_' . $key, array(
+					'type'     => 'select',
+					'label'    => __( 'Font Source', 'ht-webfonts' ),
+					'section'  => 'ht_webfont',
+					'priority' => $this->priority++,
+					'choices'  => $webfonts_sources
+					));
+				}
 				   
 
 				//font family
 				$default_family = empty($webfont) ? '' : $webfont->family;
-				$wp_customize->add_setting( 'ht_webfont_family_' . $key, array('default' => $default_family, 'transport'  => 'postMessage') );
+				if($default_family===false){
+					//do nothing
+				} else {
+					$wp_customize->add_setting( 'ht_webfont_family_' . $key, array('default' => $default_family, 'transport'  => 'postMessage') );
 
-				$wp_customize->add_control( 'ht_webfont_family_' . $key, array(
-				'type'     => 'select',
-				'label'    => __( 'Font Family', 'ht-webfonts' ),
-				'section'  => 'ht_webfont',
-				'priority' => $this->priority++,
-				'choices'  => $list_fonts
-				));
+					$wp_customize->add_control( 'ht_webfont_family_' . $key, array(
+					'type'     => 'select',
+					'label'    => __( 'Font Family', 'ht-webfonts' ),
+					'section'  => 'ht_webfont',
+					'priority' => $this->priority++,
+					'choices'  => $list_fonts
+					));
+				}
 
 				//style
 				$default_style = empty($webfont) ? '' : $webfont->style;
-				$wp_customize->add_setting( 'ht_webfont_style_' . $key, array('default' => $default_style, 'transport'  => 'postMessage') );
+				if($default_style===false){
+					//do nothing
+				} else {
+					$wp_customize->add_setting( 'ht_webfont_style_' . $key, array('default' => $default_style, 'transport'  => 'postMessage') );
 
 
-				$font_styles = $this->get_font_styles();
+					$font_styles = $this->get_font_styles($this->list_font_weights);
 
-				$wp_customize->add_control( 'ht_webfont_style_' . $key, array(
-				'type'     => 'select',
-				'label'    => __( 'Font Style', 'ht-webfonts' ),
-				'section'  => 'ht_webfont',
-				'priority' => $this->priority++,
-				'choices'  => $font_styles
-				));
+					$wp_customize->add_control( 'ht_webfont_style_' . $key, array(
+					'type'     => 'select',
+					'label'    => __( 'Font Style', 'ht-webfonts' ),
+					'section'  => 'ht_webfont',
+					'priority' => $this->priority++,
+					'choices'  => $font_styles
+					));
+				}
 
 
 				//color
 				$default_color = empty($webfont) ? '' : $webfont->color;
-				$wp_customize->add_setting( 'ht_webfont_color_' . $key, array('default' => $default_color, 'transport' => 'postMessage'));
+				if($default_color===false){
+					//do nothing
+				} else {
+					$wp_customize->add_setting( 'ht_webfont_color_' . $key, array('default' => $default_color, 'transport' => 'postMessage'));
 
-				$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'ht_webfont_color_'. $key , array(
-					'label'	=> __( 'Font Color', 'ht-webfonts' ),
-					'section' => 'ht_webfont',
-					'priority' => $this->priority++
-					
-				)));	
+					$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'ht_webfont_color_'. $key , array(
+						'label'	=> __( 'Font Color', 'ht-webfonts' ),
+						'section' => 'ht_webfont',
+						'priority' => $this->priority++
+						
+					)));
+				}	
 
 				//size
 				$default_size = empty($webfont) ? '' : $webfont->size;
-				$wp_customize->add_setting( 'ht_webfont_size_' . $key, array('default' => $default_size, 'transport'  => 'postMessage') );
+				if($default_size===false){
+					//do nothing
+				} else {
+					$wp_customize->add_setting( 'ht_webfont_size_' . $key, array('default' => $default_size, 'transport'  => 'postMessage') );
 
-				$wp_customize->add_control( 'ht_webfont_size_' . $key, array(
-				'type'     => 'text',
-				'label'    => __( 'Font Size', 'ht-webfonts' ),
-				'section'  => 'ht_webfont',
-				'priority' => $this->priority++,
-				));
+					$wp_customize->add_control( 'ht_webfont_size_' . $key, array(
+					'type'     => 'text',
+					'label'    => __( 'Font Size', 'ht-webfonts' ),
+					'section'  => 'ht_webfont',
+					'priority' => $this->priority++,
+					));
+				}
 
 				//height
 				$default_height = empty($webfont) ? '' : $webfont->height;
-				$wp_customize->add_setting( 'ht_webfont_height_' . $key, array('default' => $default_height, 'transport'  => 'postMessage') );
+				if($default_height===false){
+					//do nothing
+				} else {
+					$wp_customize->add_setting( 'ht_webfont_height_' . $key, array('default' => $default_height, 'transport'  => 'postMessage') );
 
-				$wp_customize->add_control( 'ht_webfont_height_' . $key, array(
-				'type'     => 'text',
-				'label'    => __( 'Line Height', 'ht-webfonts' ),
-				'section'  => 'ht_webfont',
-				'priority' => $this->priority++,
-				));
+					$wp_customize->add_control( 'ht_webfont_height_' . $key, array(
+					'type'     => 'text',
+					'label'    => __( 'Line Height', 'ht-webfonts' ),
+					'section'  => 'ht_webfont',
+					'priority' => $this->priority++,
+					));
+				}
 
 				//spacing
 				$default_spacing = empty($webfont) ? '' : $webfont->spacing;
-				$wp_customize->add_setting( 'ht_webfont_spacing_' . $key, array('default' => $default_spacing, 'transport'  => 'postMessage') );
+				if($default_spacing===false){
+					//do nothing
+				} else {
+					$wp_customize->add_setting( 'ht_webfont_spacing_' . $key, array('default' => $default_spacing, 'transport'  => 'postMessage') );
 
-				$wp_customize->add_control( 'ht_webfont_spacing_' . $key, array(
-				'type'     => 'text',
-				'label'    => __( 'Font Spacing', 'ht-webfonts' ),
-				'section'  => 'ht_webfont',
-				'priority' => $this->priority++,
-				));
+					$wp_customize->add_control( 'ht_webfont_spacing_' . $key, array(
+					'type'     => 'text',
+					'label'    => __( 'Font Spacing', 'ht-webfonts' ),
+					'section'  => 'ht_webfont',
+					'priority' => $this->priority++,
+					));
+				}
 		}
 
 		
@@ -419,7 +486,11 @@ if( !class_exists( 'HT_Webfonts' ) ){
 					$font_family = $mods['ht_webfont_family_'.$i];
 					$font_weight_style = $mods['ht_webfont_style_'.$i];
 					$font_weight = preg_replace("/[^0-9?! ]/","", $font_weight_style);
+					if($font_weight_style=='regular'||$font_weight_style=='italic'){
+						$font_weight = '400';
+					}
 					$font_style = preg_replace("/[^A-Za-z?! ]/","", $font_weight_style);
+					
 					$font_color = $mods['ht_webfont_color_'.$i];
 					$font_size = $mods['ht_webfont_size_'.$i];
 					$line_height = $mods['ht_webfont_height_'.$i];
@@ -427,7 +498,14 @@ if( !class_exists( 'HT_Webfonts' ) ){
 					?>
 
 						<?php if($source=='gfonts'): ?>
-							<link id='ht-webfont-<?php echo $i; ?>-font-family' href="http://fonts.googleapis.com/css?family=<?php echo str_replace(" ", "+", $mods['ht_webfont_family_'.$i]) . ":" . $font_weight_style . ( $font_weight_style != '400' ? ',400' : '' ) ; ?>" rel='stylesheet' type='text/css'>
+							<?php
+								//set the gfont_style
+								$gfont_style = $font_weight_style;
+								$gfont_style = ($gfont_style=='regular') ? '400' : $gfont_style;
+								$gfont_style = ($gfont_style=='italic') ? '400italic' : $gfont_style;
+
+							?>
+							<link id='ht-webfont-<?php echo $i; ?>-font-family' href="http://fonts.googleapis.com/css?family=<?php echo str_replace(" ", "+", $mods['ht_webfont_family_'.$i]) . ":" . $gfont_style; ?>" rel='stylesheet' type='text/css'>
 						<?php endif; ?>
 						<style id="<?php echo "ht-webfont-" . $i ."-style"; ?>">
 
@@ -439,7 +517,7 @@ if( !class_exists( 'HT_Webfonts' ) ){
 								<?php else: ?>
 									font-family: <?php echo $font_family;?>, sans-serif !important;
 								<?php endif; //end gfonts if ?>	
-							<?php endif; //end font_familty if  ?>			
+							<?php endif; //end font_family if  ?>			
 							font-weight: <?php echo $font_weight;?> !important;
 							font-style: <?php echo $font_style;?> !important;
 							<?php if($font_color != false){ ?>
@@ -474,9 +552,10 @@ if( !class_exists( 'HT_Webfonts' ) ){
 			
 			$localization_data =   array(
 				'fontCount'=>$this->list_font_counts, 
+				'variants'=>$this->list_font_weights,
 				'defaults'=>$this->default_webfonts, 
 				'ajaxnonce' => wp_create_nonce('ht-ajax-nonce'),
-				'i18n' => $ht_webfonts_i18n
+				'i18n' => $ht_webfonts_i18n,
 				);
 
 			wp_localize_script( 'ht-webfonts-scripts', 'htWebfonts', $localization_data);
