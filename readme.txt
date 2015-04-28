@@ -3,7 +3,7 @@ Contributors: herothemes
 Tags: fonts, webfonts, live, customizer, custom fonts, google fonts, websafe fonts, text, no css
 Requires at least: 3.5
 Tested up to: 4.1
-Stable tag: 1.1
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,12 @@ A. Please raise your question on the Heroic Webfonts support page at WordPress.o
 1. A screenshot of the plugin in action with one of our themes.
 
 == Changelog ==
+
+= 1.2 =
+
+Compatibility improvements
+Webfonts now in a panel
+
 
 = 1.1 =
 

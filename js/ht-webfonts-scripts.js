@@ -91,7 +91,7 @@ jQuery(document).ready(function($) {
 		//style
 		wp.customize( 'ht_webfont_style_'+i, function( value ) {
 				var index = i;
-				value.bind(function( newval ) {
+					value.bind(function( newval ) {
 					updateValues(index);	
 				} );
 			} );
@@ -218,6 +218,7 @@ jQuery(document).ready(function($) {
 
 
 		var target = jQuery('#customize-preview iframe').contents().find(selector);
+
 		if(target.length>0){
 
 			var listFontWeights = ['100', '100italic', '200', '200italic', '300', '300italic', '400', '400italic', '500', '500italic', '600', '600italic', '700', '700italic', '800', '800italic', '900', '900italic'];
@@ -252,16 +253,18 @@ jQuery(document).ready(function($) {
 	}
 
 	//add the Add New Webfont button to the DOM
-	addNewWebfontButton();
+	$(document).one('click', '#accordion-panel-ht_webfont_pane', function() {
+		addNewWebfontButton();
+	});
 
 	//adds a Add New Font  input and button to the DOM
 	function addNewWebfontButton() {
 		var newBtn = '';
-		newBtn += '<li id="customize-control-add-new-webfont" class="customize-control">';
+		newBtn += '<li id="customize-control-add-new-webfont" class="panel-meta accordion-section control-section cannot-expand">';
 		newBtn +=	'<input type="text" id="new-font-name" class="new-font-name-input" value="" placeholder="' + i18n.newNamePlaceholder + '"/>'
 		newBtn +=	'<input type="button" id="ht-new-font-add-btn" class="new-font-name-btn button" value="' + i18n.newNameAddBtn + '"/>'
 		newBtn += '</li>';
-		$('#accordion-section-ht_webfont ul').append(newBtn);
+		$(newBtn).insertAfter($('#accordion-panel-ht_webfont_pane ul.accordion-sub-container li.accordion-section').last());
 		//ajaxify new button
 		ajaxifyNewWebfontButton();
 	}
